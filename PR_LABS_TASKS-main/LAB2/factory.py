@@ -7,7 +7,7 @@ import player_pb2 as protblog_pb2
 
 class PlayerFactory:
     def to_json(self, players):
-        # Convert list of Player objects to list of dictionaries
+
         player_dicts = [
             {
                 "nickname": player.nickname,
@@ -21,7 +21,7 @@ class PlayerFactory:
         return player_dicts
 
     def from_json(self, json_string):
-        # Convert list of dictionaries to list of Player objects
+
         players = [
             Player(
                 player_data["nickname"],
@@ -52,10 +52,10 @@ class PlayerFactory:
         return players
 
     def to_xml(self, list_of_players):
-        # Create the root data element
+
         data = ET.Element("data")
 
-        # For each player, create the XML structure
+
         for player in list_of_players:
             player_elem = ET.SubElement(data, "player")
 
@@ -74,7 +74,7 @@ class PlayerFactory:
             cls = ET.SubElement(player_elem, "class")
             cls.text = player.cls
 
-        # Return the string representation of the XML
+
         return ET.tostring(data, encoding="unicode", method="xml")
 
     def from_protobuf(self, binary):
@@ -88,7 +88,7 @@ class PlayerFactory:
                 player_proto.email,
                 player_proto.date_of_birth,
                 player_proto.xp,
-                protblog_pb2.Class.Name(player_proto.cls)  # Convert enum back to its string representation
+                protblog_pb2.Class.Name(player_proto.cls)
             )
             players.append(player)
 
